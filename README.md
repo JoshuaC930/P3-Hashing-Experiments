@@ -1,8 +1,8 @@
 # Project #: Project Name
 
-* Author: Your Name
-* Class: CS321 Section #
-* Semester: 
+* Author: Joshua Corrales
+* Class: CS321 Section #2
+* Semester: Fall 2022
 
 ## Overview
 
@@ -32,11 +32,9 @@ This section presents timing and other results of the experiments that
 you were asked to perform as part of the project.
 
 ## Sources used
+https://docs.oracle.com/javase/8/docs/api/java/util/Hashtable.html
+https://www.geeksforgeeks.org/hashtable-in-java/
 
-If you used any sources outside of the lecture notes, class lab files,
-or text book you need to list them here. If you looked something up on
-stackoverflow.com and fail to cite it in this section it will be
-considered plagiarism and be dealt with accordingly. So be safe CITE!
 
 ----------
 This README template is using Markdown. To preview your README output,

@@ -7,8 +7,8 @@
 public class TwinPrimeGenerator
 {
     /**
-     * Method
-     * @return
+     * Method for generating twin prime numbers
+     * @return - Returns the smallest of the twin primes
      */
     public static int generate()
     {
@@ -24,11 +24,9 @@ public class TwinPrimeGenerator
             if (isPrime(n1) && isPrime(n2))
                 foundTwinPrime = true;
         }
+        //System.out.printf("Twin Prime Numbers Generated: %d and %d\n", n1, n2);
 
-        System.out.println(n1);
-        System.out.println(n2);
         return Math.min(n1, n2);
-
     }
 
     /**
@@ -49,8 +47,8 @@ public class TwinPrimeGenerator
     }
 
     /**
-     * Driver method for testing purposes
-     * @param args - no arguments needede to be passed
+     * Driver method for testing purposes and sanity check
+     * @param args - no arguments needed to be passed
      */
     public static void main(String[] args)
     {

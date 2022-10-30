@@ -2,15 +2,18 @@
 
 public class HashTable<T>
 {
-    HashObject<?> hashTable[];
-    private int tableSize, elementCount, frequencyCount, probeCount;
+    HashObject<?>[] hashTable;
+    private final int tableSize;
+    private int numOfElements;
+    private int frequencyCount;
+    private int totalProbeCount;
 
     /**
      * Default constructor for initializing a blank HashTable
      */
     public HashTable()
     {
-        this.tableSize = TwinPrimeGenerator.generate();
+        this.tableSize = 95791;
         hashTable = new HashObject<?>[tableSize];
     }
 
@@ -18,41 +21,36 @@ public class HashTable<T>
      * Overloaded constructor for initializing a new HashTable with a
      * given table size
      * @param tableSize - Size of table
-     * @param loadFactor - Load factor used for hashing
      */
-    public HashTable(int tableSize, double loadFactor)
+    public HashTable(int tableSize)
     {
         this.tableSize = tableSize;
         hashTable = new HashObject<?>[tableSize];
     }
 
     /**
-     * put method for plaing HashObjects into HashTable
+     * put method for placing HashObjects into HashTable
      * @param object - Object to put into table
-     * @param hashType - Hashtype of Object
+     * @param type - Hash type of Object
      */
-    public void put(HashObject<T> object, int hashType)
+    public void put(HashObject<T> object, int type)
     {
         int i = 0, value = -1;
 
         while (i < tableSize)
         {
-            if (hashType == 1)
-            {
+            if (type == 1)
                 value = LinearProbing.linearProbe(object, i, tableSize);
-            }
-            else if (hashType == 2)
-            {
+            else if (type == 2)
                 value = DoubleHashing.doubleHash(object, i, tableSize);
-            }
 
             object.incrementProbeCount();
 
             if (hashTable[value] == null)
             {
                 hashTable[value] = object;
-                elementCount++;
-                probeCount += i + 1;
+                numOfElements++;
+                totalProbeCount += i + 1;
                 break;
             }
 
@@ -77,13 +75,13 @@ public class HashTable<T>
      * Method for getting total number of probes
      * @return - returns probe count
      */
-    public int getTotalProbes() { return probeCount; }
+    public int getTotalProbes() { return totalProbeCount; }
 
     /**
      * Method for getting average of probes for Hash Table
      * @return - Returns average of probes
      */
-    public double getAverageProbes() { return  ((double) probeCount / (double) elementCount); }
+    public double getAverageProbes() { return  ((double) totalProbeCount / (double) numOfElements); }
 
     /**
      * Method for returning size of Hash Table
@@ -95,13 +93,13 @@ public class HashTable<T>
      * Method for returning number of elements in Hash table
      * @return - Returns number of elements in Hash Table
      */
-    public int getNumOfElements() { return elementCount; }
+    public int getNumOfElements() { return numOfElements; }
 
     /**
      * Method for getting load factor
      * @return - Returns load factor
      */
-    public double getLoadFactor() { return  ((double) elementCount / (double) tableSize); }
+    public double getLoadFactor() { return  ((double) numOfElements / (double) tableSize); }
 
     /**
      * Helper method for ensuring calculations always return positive integers

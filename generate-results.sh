@@ -19,7 +19,7 @@ echo
 echo "Running tests on random data...with debug level 1: output in results-random.txt"
 echo
 echo > results-random.txt
-for f in 0.5 0.6 0.7 0.8 0.9 0.95 0.99
+for f in 0.5 0.6 0.7 0.8 0.9 0.95 0.98 0.99
 do
 	header "results-random.txt"
 	echo "Running java HashtableTest dataSource = 1 loadFactor = $f"
@@ -32,7 +32,7 @@ echo
 echo "Running tests on Date data...with debug level 1: output in results-date.txt"
 echo
 echo > results-date.txt
-for f in 0.5 0.6 0.7 0.8 0.9 0.95 0.99
+for f in 0.5 0.6 0.7 0.8 0.9 0.95 0.98 0.99
 do
 	header "results-date.txt"
 	echo "Running java HashtableTest dataSource = 2 loadFactor = $f"
@@ -45,7 +45,7 @@ echo
 echo "Running tests on word-list data...with debug level 1: output in results-word-list.txt"
 echo
 echo > results-word-list.txt
-for f in 0.5 0.6 0.7 0.8 0.9 0.95 0.99
+for f in 0.5 0.6 0.7 0.8 0.9 0.95 0.98 0.99
 do
 	header "results-word-list.txt"
 	echo "Running java HashtableTest dataSource = 3 loadFactor = $f"

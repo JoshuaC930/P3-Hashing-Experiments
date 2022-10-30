@@ -22,6 +22,7 @@ public class HashtableTest
      */
     public static void main(String[] args)
     {
+        String dataType;
         //Usage check, stops execution if correct arguments are not used
         if (args.length < 2)
             System.out.println("Incorrect usage of class arguments. Usage: <datatype> <load factor> [<debug level>]");
@@ -30,7 +31,7 @@ public class HashtableTest
         {
             int inputType = Integer.parseInt(args[0]);
             double loadFactor = Double.parseDouble(args[1]);
-            size = TwinPrimeGenerator.generate();
+            size = 95791;
             int maxElements = (int) (size * loadFactor);
 
             if (args.length == 3)
@@ -48,43 +49,37 @@ public class HashtableTest
             //Data Source 1: Integer object
             if (inputType == 1)
             {
+                dataType = "Integer";
                 System.out.println("Data Source 1: Integer");
-                linearHashTable = new HashTable<>(size, loadFactor);
-                doubleHashTable = new HashTable<>(size, loadFactor);
+                linearHashTable = new HashTable<>(size);
+                doubleHashTable = new HashTable<>(size);
 
                 while (linearHashTable.getNumOfElements() <= maxElements && doubleHashTable.getNumOfElements() <= maxElements)
                 {
                     Random rand = new Random();
                     int randomVal = rand.nextInt();
 
-                    HashObject linearObject = new HashObject<Integer>(randomVal);
-                    HashObject doubleObject = new HashObject<Integer>(randomVal);
+                    HashObject linearObject = new HashObject<>(randomVal);
+                    HashObject doubleObject = new HashObject<>(randomVal);
 
                     linearHashTable.put(linearObject, 1);
                     doubleHashTable.put(doubleObject, 2);
                 }
 
-                System.out.println("LINEAR HASHING");
-                System.out.printf("Input %d elements, of which %d duplicates", linearHashTable.getNumOfElements(), linearHashTable.getNumOfElements());
-                System.out.printf("Load Factor = %f, Average Number of Probes %f", loadFactor, linearHashTable.getAverageProbes());
-
-                System.out.println("DOUBLE HASHING");
-                System.out.printf("Input %d elements, of which %d duplicates", doubleHashTable.getNumOfElements(), doubleHashTable.getNumOfElements());
-                System.out.printf("Load Factor = %f, Average Number of Probes %f", loadFactor, doubleHashTable.getAverageProbes());
-
-                if (debug) debug();
+                printOut(dataType, loadFactor);
             }
 
             //Data Source 2: Date object
-            if (inputType == 2)
+            else if (inputType == 2)
             {
+                dataType = "Date";
                 System.out.println("Data Source 2: Date Object");
-                linearHashTable = new HashTable<>(size, loadFactor);
-                doubleHashTable = new HashTable<>(size, loadFactor);
+                linearHashTable = new HashTable<>(size);
+                doubleHashTable = new HashTable<>(size);
+                long current = new Date().getTime();
 
                 while (linearHashTable.getNumOfElements() <= maxElements && doubleHashTable.getNumOfElements() <= maxElements)
                 {
-                    long current = new Date().getTime();
                     current += 1000;
                     Date date = new Date(current);
 
@@ -95,35 +90,27 @@ public class HashtableTest
                     doubleHashTable.put(doubleObject, 2);
                 }
 
-                System.out.println("LINEAR HASHING");
-                System.out.printf("Input %d elements, of which %d duplicates%n", linearHashTable.getNumOfElements(), linearHashTable.getFrequencyCount());
-                System.out.printf("load factor = %f, Avg. no. of probes %f%n", loadFactor, linearHashTable.getAverageProbes());
-
-                System.out.println("DOUBLE HASHING");
-                System.out.printf("Input %d elements, of which %d duplicates%n", doubleHashTable.getNumOfElements(), doubleHashTable.getFrequencyCount());
-                System.out.printf("load factor = %f, Avg. no. of probes %f%n", loadFactor, doubleHashTable.getAverageProbes());
-
-                if(debug) debug();
+                printOut(dataType, loadFactor);
             }
 
             //Data Source 3: Word List
-            if (inputType == 3)
+            else if (inputType == 3)
             {
+                dataType = "Word-List";
                 System.out.println("Data Source 3: Word-List");
 
                 File wordList = new File("word-list");
                 Scanner fileScanner;
 
-                linearHashTable = new HashTable<>(size, loadFactor);
-                doubleHashTable = new HashTable<>(size, loadFactor);
-
                 try
                 {
                     fileScanner = new Scanner(wordList);
 
-                    int i = 0;
+                    linearHashTable = new HashTable<>(size);
+                    doubleHashTable = new HashTable<>(size);
 
-                    while (fileScanner.hasNext()&& linearHashTable.getLoadFactor() < loadFactor)
+                    int i = 0;
+                    while (fileScanner.hasNext() && linearHashTable.getLoadFactor() < loadFactor)
                     {
                         String line = fileScanner.nextLine();
 
@@ -131,18 +118,25 @@ public class HashtableTest
                         HashObject doubleObject = new HashObject<>(line);
 
                         linearHashTable.put(linearObject, 1);
-                        linearHashTable.put(doubleObject, 2);
+                        doubleHashTable.put(doubleObject, 2);
 
                         i++;
                     }
 
-                    System.out.println("LINEAR HASHING");
-                    System.out.printf("Input %d elements, of which %d duplicates%n", i, linearHashTable.getFrequencyCount());
-                    System.out.printf("load factor = %f, Avg. no. of probes %s%n", loadFactor, linearHashTable.getAverageProbes());
+                    System.out.println("Found a twin Prime Table Capacity: " + size);
+                    System.out.printf("Input: %s       Load Factor: %s\n", dataType, loadFactor);
 
-                    System.out.println("DOUBLE HASHING");
-                    System.out.printf("Input %d elements, of which %d duplicates%n", i, doubleHashTable.getFrequencyCount());
-                    System.out.printf("load factor = %f, Avg. no. of probes %s%n", loadFactor, doubleHashTable.getAverageProbes());
+                    System.out.println("~~~~~~~~~~~~~~~~~~~~~~~Using Linear Probing~~~~~~~~~~~~~~~~~~~~~~~");
+                    System.out.printf("HashtableTest: size of hash table is %d", linearHashTable.getNumOfElements());
+                    System.out.printf("\n      Inserted %d elements, of which %d, were duplicates", i, linearHashTable.getFrequencyCount());
+                    System.out.println("\nAvg. no. of probes = " + linearHashTable.getAverageProbes());
+
+                    System.out.println();
+
+                    System.out.println("~~~~~~~~~~~~~~~~~~~~~~~Using Double Hashing~~~~~~~~~~~~~~~~~~~~~~~");
+                    System.out.printf("HashtableTest: size of hash table is %d", doubleHashTable.getNumOfElements());
+                    System.out.printf("\n      Inserted %d elements, of which %d, were duplicates", i, doubleHashTable.getFrequencyCount());
+                    System.out.println("\nAvg. no. of probes = " + doubleHashTable.getAverageProbes());
 
                     if (debug) debug();
                 }
@@ -160,7 +154,32 @@ public class HashtableTest
     }
 
     /**
-     * Method for saving dubug results to an output file
+     * Helper method for printing output
+     * @param dataType - Datatype being used for hashing
+     * @param loadFactor - Load factor used
+     */
+    private static void printOut(String dataType, double loadFactor)
+    {
+        System.out.println("Found a twin Prime Table Capacity: " + size);
+        System.out.printf("Input: %s | Load Factor: %s\n", dataType, loadFactor);
+
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~Using Linear Probing~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.printf("HashtableTest: size of hash table is %d", linearHashTable.getSize());
+        System.out.printf("\n      Inserted %d elements, of which %d, were duplicates", linearHashTable.getNumOfElements(), linearHashTable.getFrequencyCount());
+        System.out.println("\nAvg. no. of probes = " + linearHashTable.getAverageProbes());
+
+        System.out.println();
+
+        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~Using Double Hashing~~~~~~~~~~~~~~~~~~~~~~~");
+        System.out.printf("HashtableTest: size of hash table is %d", doubleHashTable.getSize());
+        System.out.printf("\n      Inserted %d elements, of which %d, were duplicates", doubleHashTable.getNumOfElements(), doubleHashTable.getFrequencyCount());
+        System.out.println("\nAvg. no. of probes = " + doubleHashTable.getAverageProbes());
+
+        if (debug) debug();
+    }
+
+    /**
+     * Method for saving debug results to an output file
      */
     private static void debug()
     {
@@ -182,10 +201,11 @@ public class HashtableTest
 
             linearPrintWriter.close();
             doublePrintWriter.close();
+            System.out.println("Saved dump of hash table");
         }
         catch (IOException e)
         {
-            System.out.println("A IOException Occurred");
+            System.out.println("An IOException Occurred");
         }
     }
 }

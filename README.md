@@ -34,9 +34,5 @@ you were asked to perform as part of the project.
 ## Sources used
 https://docs.oracle.com/javase/8/docs/api/java/util/Hashtable.html
 https://www.geeksforgeeks.org/hashtable-in-java/
-
-
-----------
-This README template is using Markdown. To preview your README output,
-you can copy your file contents to a Markdown editor/previewer such
-as [https://stackedit.io/editor](https://stackedit.io/editor).
+https://www.baeldung.com/java-generating-random-numbers-in-range
+https://www.geeksforgeeks.org/twin-prime-numbers/

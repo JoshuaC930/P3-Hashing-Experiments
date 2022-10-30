@@ -11,7 +11,7 @@ we are tasked to find the average number of probes integers, dates, and a word l
 
 ## Reflection
 
-Overall, this project was fairy straight-forward compared to the previous prohect which was nice.
+Overall, this project was fairy straight-forward compared to the previous project which was nice.
 I had a little of trouble understanding LinearProbing and DoubleHashing as those seemed 
 a little above my head at first. Also working on the TwinPrimeGenerator was also a bit
 confusing.

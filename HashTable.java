@@ -1,5 +1,3 @@
-//TODO: Add comments and JavaDocs
-
 public class HashTable<T>
 {
     HashObject<?>[] hashTable;
@@ -13,7 +11,7 @@ public class HashTable<T>
      */
     public HashTable()
     {
-        this.tableSize = 95791;
+        this.tableSize = TwinPrimeGenerator.generate();
         hashTable = new HashObject<?>[tableSize];
     }
 

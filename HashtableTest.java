@@ -1,5 +1,3 @@
-//TODO: Add comments and JavaDocs
-
 import java.io.*;
 import java.util.Date;
 import java.util.Random;
@@ -31,7 +29,7 @@ public class HashtableTest
         {
             int inputType = Integer.parseInt(args[0]);
             double loadFactor = Double.parseDouble(args[1]);
-            size = 95791;
+            size = TwinPrimeGenerator.generate();
             int maxElements = (int) (size * loadFactor);
 
             if (args.length == 3)

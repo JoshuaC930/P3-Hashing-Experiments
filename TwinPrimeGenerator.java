@@ -1,8 +1,5 @@
-//TODO: Add comments and JavaDocs
-
-
 /**
- * Static method for generating twin prime numbers within 95500 through 96000
+ * Static class for generating twin prime numbers within 95500 through 96000
  */
 public class TwinPrimeGenerator
 {

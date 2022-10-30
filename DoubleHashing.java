@@ -1,4 +1,3 @@
-//TODO: Add comments and JavaDocs
 public class DoubleHashing extends HashTable
 {
     /**

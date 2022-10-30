@@ -8,6 +8,7 @@ javac *.java
 #put the following in a loop to test load factor of 0.5, 0.6, 0.7, 0.8 and 0.9 for word-list
 debugLevel=1
 
+#scipt now runs test for all load factors
 for load in 0.5 0.6 0.7 0.8 0.9
 do
   load=$load
